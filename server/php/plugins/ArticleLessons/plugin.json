@@ -1,0 +1,9 @@
+{
+	"name": "ArticleLessons", 
+	"class": "fa fa-2x fa-edit",
+	"description": "By enabling this plugin, instructor can add article type lessons.",
+	"dependencies": "Courses",
+	"module_id": "727",
+	"module_hash": "03554e36c0d5fe702e47040b867b1e25",
+	"display_order": "1"
+}

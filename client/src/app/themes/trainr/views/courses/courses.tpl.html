@@ -1,0 +1,5 @@
+<section>
+  <div banner position="topBanner" ng-if="$root.settings['site.enabled_plugins'].indexOf('Banner') > -1"></div>
+  <course-category category-id="{{category_id}}" limit="10"  category-view-type="list" ></course-category>
+  <div banner position="bottomBanner" ng-if="$root.settings['site.enabled_plugins'].indexOf('Banner') > -1"></div>
+</section>

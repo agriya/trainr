@@ -1,0 +1,108 @@
+<header class="clearfix" id="header">
+    <nav class="navbar navbar-default list-group-item-text" ng-show="!isAuth">
+      <div class="container">
+        <div class="row">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle navbar-inverse navbar-inverse" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">{{'Toggle navigation'|translate}}</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+            <h1 class="h4 list-group-item-text"><a href="#!/" title="{{$root.settings['site.name']}}"><img src="assets/img/logo.png" alt="[Image: {{$root.settings['site.name']}}]" title="{{$root.settings['site.name']}}" class="img-responsive navbar-btn"></a></h1>
+          </div>
+          <div class="category_dropdown navbar-collapse collapse">
+			<div class="col-md-offset-2">
+             <ul class="nav navbar-nav navbar-btn list-group-item-text">
+				<li class="dropdown text-center"> 
+					<a data-toggle="dropdown" onClick="return false;" 
+					href="javascript:void(0);" class="h6 list-group-item-heading list-group-item-text">{{'Subjects '|translate}}<b class="caret"></b></a>
+					  <ul class="dropdown-menu text-left">
+						<li ng-repeat="parentCategory in model.common.parentCategories.data" class="dropdown dropdown-submenu"><a ui-sref="CourseSearch({ category_id: {{parentCategory.id}} })" title="{{parentCategory.sub_category_name}}" class="dropdown-toggle" data-toggle="dropdown"><span class="col-xs-12 nav">{{parentCategory.sub_category_name}}</span>&nbsp;&nbsp;<i class="fa fa-angle-right"></i></a>
+							<ul class="dropdown-menu">
+								 <li ng-repeat="subCategory in parentCategory.sub_category" ><a ui-sref="CourseSearch({ category_id: {{subCategory.category_id}} })" title="{{subCategory.sub_category_name}}" class="dropdown-toggle" data-toggle="dropdown">{{subCategory.sub_category_name}}</a></li>							
+							</ul>
+						</li>
+					  </ul>
+				</li>
+			  </ul>
+            <form class="form-horizontal">
+              <div class="navbar-btn col-md-3 col-md-offset-1 col-lg-4 col-lg-offset-1 col-sm-3 hidden-xs">
+                <div class="input-group navbar-btn list-group-item-text"> <span class="input-group-addon"><span  ui-sref="CourseSearch({q:csearchVal})" class="glyphicon glyphicon-search"></span></span>
+                  <input type="search" ng-model="csearchVal" ng-keyup="$event.keyCode == 13 ? goToState('CourseSearch', {q: csearchVal}) : null" class="form-control" placeholder="{{'Search Courses '|translate}}" >
+                </div>
+              </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right navbar-btn list-group-item-text">
+			  <li class="text-center" ng-if="$root.settings['site.enabled_plugins'].indexOf('Instructor') > -1"><a ng-href="#!/users/login"  title="{{'Become an Instructor'|translate}}">{{'Become an Instructor'|translate}}</a></li>
+              <li class="text-center"><a ng-href="#!/users/login"  title="{{'Log in'|translate}}">{{'Log in'|translate}}</a></li>
+              <li class="text-center"  ng-if="$root.settings['site.enabled_plugins'].indexOf('Subscriptions') === -1"><a ng-href="#!/users/signup" title="{{'Sign Up'|translate}}">{{'Sign Up'|translate}}</a></li>
+			  <li class="text-center" ng-if="$root.settings['site.enabled_plugins'].indexOf('Subscriptions') > -1"><a href="#!/subscribe/plans" title="{{'Pricing'|translate}}">{{'Pricing'|translate}}</a></li>
+            </ul>
+			</div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    </nav>
+	<nav class="navbar navbar-default list-group-item-text" ng-show="isAuth">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle navbar-inverse" data-target=".navbar-collapse" data-toggle="collapse"> <span class="sr-only">{{'Toggle navigation'|translate}}</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+          <div class="navbar-btn clearfix list-group-item-heading hidden-xs"></div>
+          <h1 class="h4 list-group-item-text"><a href="#!/courses/search" title="{{$root.settings['site.name']}}"><img src="assets/img/logo.png" alt="[Image:{{$root.settings['site.name']}}]" title="{{$root.settings['site.name']}}" class="img-responsive navbar-btn"></a></h1>
+        </div>
+        <div class="category_dropdown navbar-collapse collapse">
+		  <div class="col-md-offset-2">
+          <ul class="nav navbar-nav navbar-btn list-group-item-text">
+			<li class="dropdown text-center"> 
+				<a data-toggle="dropdown" onClick="return false;" 
+				href="javascript:void(0);" class="h6 list-group-item-heading list-group-item-text">{{'Subjects '|translate}}<b class="caret"></b></a>
+			  <ul class="dropdown-menu text-left">
+				<li ng-repeat="parentCategory in model.common.parentCategories.data" class="dropdown dropdown-submenu"><a ui-sref="CourseSearch({ category_id: {{parentCategory.id}} })" title="{{parentCategory.sub_category_name}}" class="dropdown-toggle" data-toggle="dropdown"><span class="col-xs-12 nav">{{parentCategory.sub_category_name}}</span>&nbsp;&nbsp;<i class="fa fa-angle-right"></i></a>
+					<ul class="dropdown-menu">
+						 <li ng-repeat="subCategory in parentCategory.sub_category" ><a ui-sref="CourseSearch({ category_id: {{subCategory.category_id}} })" title="{{subCategory.sub_category_name}}" class="dropdown-toggle" data-toggle="dropdown">{{subCategory.sub_category_name}}</a></li>							
+					</ul>
+				</li>
+			  </ul>
+			
+			</li>
+          </ul>
+          <form class="navbar-btn col-md-3 col-md-offset-1 col-lg-4 col-lg-offset-2 col-sm-3">
+            <div class="form-group list-group-item-text">
+              <label class="sr-only" for="exampleInputAmount"></label>
+              <div class="input-group navbar-btn list-group-item-text">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                <input type="text" class="form-control input-sm" ng-model="csearchVal" ng-keyup="$event.keyCode == 13 ? goToState('CourseSearch', {q: csearchVal}) : null" id="exampleInputAmount" placeholder="{{'Search Courses'|translate}}">
+              </div>
+            </div>
+          </form>
+          <div class="navbar-right row">
+            <ul class="nav navbar-nav navbar-btn list-group-item-text">
+			  <li class="text-center list-group-item-heading h6 list-group-item-text dropdown" ng-show="$root.auth.providertype === 'admin'"><a href="ag-admin" title="{{'Admin Dashboard'|translate}}" >{{'Admin Dashboard'|translate}} </a></li>
+			  <li class="text-center list-group-item-heading h6 list-group-item-text dropdown" ng-show="model.userDetails.is_teacher === 1 && $root.settings['site.enabled_plugins'].indexOf('Instructor') > -1 && $root.auth.providertype !== 'admin'"><a href="#!/my-courses/teaching" title="{{'Instructor Dashboard'|translate}}" data-toggle="dropdown" class="dropdown-toggle">{{'Instructor Dashboard'|translate}} </a></li>
+			  <li class="text-center list-group-item-heading h6 list-group-item-text dropdown" ng-show="model.userDetails.is_teacher !== 1 && $root.settings['site.enabled_plugins'].indexOf('Instructor') > -1 && $root.auth.providertype !== 'admin'"><a href="#!/courses/add" title="{{'Become an Instructor'|translate}}" data-toggle="dropdown" class="dropdown-toggle">{{'Become an Instructor'|translate}} </a></li>
+              <li class="list-group-item-heading h6 list-group-item-text dropdown dropdown-img">
+				<a ng-if="$root.auth.user_image_hash !== '' && $root.auth.user_image_hash !== null" href="" class="btn-sm dropdown-toggle user-img" data-toggle="dropdown"> 
+				    <img  ng-src="{{$root.site_url}}img/small_thumb/User/{{$root.auth.user_image_hash}}" alt="[Image: {{$root.auth.displayname}}]" title="{{$root.auth.displayname}}" class="img-circle"/>
+				    <span class="caret"></span>
+				</a>
+				<a ng-if="$root.auth.user_image_hash === '' || $root.auth.user_image_hash === null" href="" class="btn-sm dropdown-toggle user-img" data-toggle="dropdown"> 
+					<img  ng-src="{{$root.site_url}}img/small_thumb/User/0.default.jpg" alt="[Image: {{$root.auth.displayname}}]" title="{{$root.auth.displayname}}" class="img-circle" />
+					<span class="caret"></span>
+				</a>
+                <ul class="dropdown-menu nav-stacked">
+				  <li class="h6"><a href="#!/my-courses/learning" title="{{'My Courses'|translate}}<" class="text-left">{{'My Courses'|translate}}</a></li>
+                  <li class="h6"><a href="#!/users/edit-profile" title="{{'Profile'|translate}}" class="text-left">{{'Edit Profile'|translate}}</a></li>
+                  <li class="h6"><a href="#!/users/change_password" title="{{'Change Password'|translate}}" class="text-left">{{'Change Password'|translate}}</a></li>
+				  <li class="h6" ng-if="$root.settings['site.enabled_plugins'].indexOf('Subscriptions') > -1" ><a href="#!/me/subscriptions" title="{{'My Subscriptions'|translate}}" class="text-left">{{'My Subscriptions'|translate}}</a></li>
+				  <li class="h6" ng-if="$root.settings['site.enabled_plugins'].indexOf('CourseCheckout') > -1"><a href="#!/transactions" title="{{'My Transactions'| translate}}">{{'My Transactions'| translate}}</a></li>
+				  <li class="h6" ng-if="$root.settings['site.enabled_plugins'].indexOf('Withdrawal') > -1"><a href="#!/user_cash_withdrawals" title="{{'Withdraw Fund Requests'| translate}}">{{'Withdraw Fund Requests'| translate}}</a></li>
+				 <li class="divider"></li>
+                 <li class="h6" ng-if='!contentInIframe'><a href="#!/users/logout" title="{{'Log out'|translate}}" class="text-left">{{'Log out'|translate}}</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+		  </div>
+        </div>
+      </div>
+    </nav>
+      </div>
+    </div>
+  </header>

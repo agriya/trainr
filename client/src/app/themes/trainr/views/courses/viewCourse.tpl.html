@@ -1,0 +1,112 @@
+<main id="main" class="main bg-info bg-primary">
+	<div banner position="topBanner" ng-if="$root.settings['site.enabled_plugins'].indexOf('Banner') > -1"></div>
+    <div class="clearfix" ng-show="model.loading === false">
+        <div class="col-md-4"> 
+            <div class="well-sm col-sm-offset-3">
+            	<div class="well-lg"></div>
+					<div ng-if="model.course.parent_category_name"><a href="#!/courses/category/{{model.course.parent_category_id}}/{{model.course.parent_category_name|slugify}}" title="{{model.course.parent_category_name}}" class="initialism"><i class="glyphicon glyphicon-chevron-left small"></i> <strong>{{model.course.parent_category_name}}</strong></a>&nbsp;/&nbsp;
+					<a href="#!/courses/category/{{model.course.category_id}}/{{model.course.category_name|slugify}}" title="{{model.course.category_name}}" class="initialism"><strong>{{model.course.category_name}}</strong></a></div>
+                <h2 class="list-group-item-heading course-title"><strong>{{model.course.title}}</strong></h2>
+                <hr />
+                <p class="navbar-btn"> {{model.course.subtitle}}</p>
+                <div class="well-sm"></div>
+				<div class="clearfix" ng-if="model.user_profile && model.course.user_id">
+					<h3 class="list-group-item-heading">{{'Instructors'|translate}}</h3>
+					<div class="media pull-left list-group-item-heading"> 
+						 <profile-image  user-image-hash='model.course.user_image_hash' user-display-name='{{model.course.displayname}}' user-profile-id='model.course.user_id' ng-if='model.course' user-profile-thumb='medium_thumb'></profile-image>
+					</div>
+					<div class="media-body col-sm-7 col-md-7">
+						<profile-name  user-display-name='model.course.displayname' user-profile-id='model.course.user_id' ng-if='model.course' user-designation-text='{{model.course.designation}}' user-designation='yes'></profile-name>
+					</div>
+					<div class='col-sm-8 col-md-7'>
+						<ul class="list-inline">
+							<li ng-show="model.user_profile.twitter_profile_link"><a href="{{model.user_profile.twitter_profile_link}}" target="_blank" class="text-muted"><span class="fa-stack fa-lg"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-twitter fa-stack-1x fa-inverse"></i> </span> </a></li>
+							<li ng-show="model.user_profile.google_plus_profile_link"><a href="{{model.user_profile.google_plus_profile_link}}" target="_blank" class="text-muted"> <span class="fa-stack fa-lg"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i> </span></a></li>
+							<li ng-show="model.user_profile.facebook_profile_link"><a href="{{model.user_profile.facebook_profile_link}}" target="_blank" class="text-muted"><span class="fa-stack fa-lg"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-facebook fa-stack-1x fa-inverse"></i> </span></a></li>
+							<li ng-show="model.user_profile.youtube_profile_link"><a href="{{model.user_profile.youtube_profile_link}}" target="_blank" class="text-muted"><span class="fa-stack fa-lg"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-youtube fa-stack-1x fa-inverse"></i> </span> </a></li>
+							<li ng-show="model.user_profile.website"><a href="{{model.user_profile.website}}" target="_blank" class="text-muted"><span class="fa-stack fa-lg"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-globe fa-stack-1x fa-inverse"></i> </span> </a></li>
+							<li ng-show="model.user_profile.linkedin_profile_link"><a href="{{model.user_profile.linkedin_profile_link}}" target="_blank" class="text-muted"><span class="fa-stack fa-lg"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i> </span> </a></li>
+						</ul>
+					</div>
+				</div>
+				<div banner position="courseBanner" ng-if="$root.settings['site.enabled_plugins'].indexOf('Banner') > -1" class="max-img"></div>
+            </div>
+            <div class="well-lg visible-xs"></div>
+			
+		</div>
+		<div class="col-md-8 navbar-default text-muted">
+          <div class="well-sm hidden-xs hidden-sm"></div>
+            <div class="well-lg clearfix col-md-11">
+				<div class="clearfix">
+					<div class="col-sm-6">
+						<div ng-if="$root.settings['site.enabled_plugins'].indexOf('RatingAndReview') > -1 && model.course.is_from_mooc_affiliate !== 1"> 
+							<span class="show navbar-btn" ng-if="model.course.course_user_feedback_count > 0"><strong><a href="#reviews" class="text-info" ng-click="gotoAnchorLink($event,'reviews', model.course.course_user_feedback_count)">{{'Reviews'|translate}}</a></strong></span>
+							<rating-stars average-rating='{{model.course.average_rating}}' ng-click="gotoAnchorLink($event,'reviews', model.course.course_user_feedback_count)" ng-if="model.course && $root.settings['site.enabled_plugins'].indexOf('RatingAndReview') > -1" ></rating-stars> 
+							<p><span ng-click="gotoAnchorLink($event,'reviews', model.course.course_user_feedback_count)" class="text-muted">{{model.course.course_user_feedback_count}} {{'ratings'|translate}} {{model.course.course_user_count}} {{'students enrolled'|translate}}</span></p>
+						</div>
+					</div>
+					 <div class="col-sm-6">
+						<course-wishlist course-wishlist='model.course' wishlist-type='heartWithText' wishlist-label={{'Wishlist'|translate}} wishlisted-label={{'Wishlisted'|translate}}  ng-if="model.course && $root.settings['site.enabled_plugins'].indexOf('CourseWishlist') > -1" class="pull-right"></course-wishlist>
+					 </div>	
+				</div>
+				<div class="clearfix">
+					 <div class="">
+						<payment-buttons user-id="{{model.course.user_id}}" btn-link="{{model.course.mooc_affiliate_course_link}}" instruction-level='{{model.course.instructional_level_id}}' title='{{model.course.title}}' slug='{{model.course.slug}}' course-price='{{model.course.price}}' course-id='{{model.course.id}}' ng-if='model.course.id' class="well-sm"></payment-buttons>							
+					 </div>
+				</div>
+				<div class="well-sm  max-img" >
+					<div class="clearfix">
+						<div class="clearfix initialism">{{'All content in'|translate}} "{{model.course.title}}?" </div>
+						 <hr />
+							<div class="col-sm-6 clearfix"  ng-show="model.course.description  !== '' && model.course.description  !== null">
+								<h4 class="list-group-item-heading text-info"><strong>{{'About This Course'|translate}}</strong></h4>
+								<div class="well-sm"></div>
+								<p class="col-sm-12 nav text-muted" ng-bind-html='model.course.description'></p>
+							</div>
+							<div class="col-sm-6">
+								<online-lessons ng-if="model.course.id"></online-lessons>
+								<social-share share-title='{{model.course.title}}' share-link = '#!/course/{{model.course.id}}/{{model.course.slug}}' ng-if="model.course.id && $root.settings['site.enabled_plugins'].indexOf('SocialShare') > -1"></social-share> 
+							</div>
+					  </div>
+					<div class="clearfix" ng-show="WhatActionsStudentsHaveToPerformBeforeBegin !== '' && WhatActionsStudentsHaveToPerformBeforeBegin !== null">
+						<hr>
+						<div class="col-sm-12 clearfix">
+							<h4 class="list-group-item-heading text-info"><strong>{{'What are the requirements?'|translate}}</strong></h4>
+							<div class="well-sm"></div>
+							<p class="" ng-bind-html="WhatActionsStudentsHaveToPerformBeforeBegin"></p>
+						</div>
+					 </div>
+					<div class="clearfix" ng-show="studentsWillBeAbleTo !== '' && studentsWillBeAbleTo !== null">
+						<hr>
+						<div class="col-sm-12 clearfix">
+							<h4 class="list-group-item-heading text-info"><strong>{{'What am I going to get from this course?'|translate}}</strong></h4>
+							<div class="well-sm"></div>
+							<p class="" ng-bind-html="studentsWillBeAbleTo"></p>
+						</div>
+					 </div>
+					<div class="clearfix" ng-show="whoShouldTakeThisCourseAndWhoShouldNot !== '' && whoShouldTakeThisCourseAndWhoShouldNot !== null">
+						<hr>
+						<div class="col-sm-12 clearfix">
+							<h4 class="list-group-item-heading text-info"><strong>{{'What is the target audience?'|translate}}</strong></h4>
+							<div class="well-sm"></div>
+							<p class="" ng-bind-html="whoShouldTakeThisCourseAndWhoShouldNot"></p>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix">
+					<hr>
+					<div class="col-sm-12 clearfix" id="reviews">
+						<course-feedback course-id='{{model.course.id}}' ng-if="model.course.id && $root.settings['site.enabled_plugins'].indexOf('RatingAndReview') > -1"></course-feedback>	
+					</div>
+					<div ng-if="$root.settings['site.enabled_plugins'].indexOf('Comments') > -1 && ($root.settings['facebook.is_enabled_facebook_comment'] === '1' || $root.settings['disqus.is_enabled_disqus_comment'] === '1')" >
+						<facebook-comments ng-if="$root.settings['facebook.comments.api_key'] && $root.settings['facebook.is_enabled_facebook_comment'] === '1'"></facebook-comments>			
+						<dir-disqus config="disqusConfig" ng-if="model.course.id && $root.settings['disqus.comments.shortname'] && $root.settings['disqus.is_enabled_disqus_comment'] === '1'" ></dir-disqus>
+					</div>
+			    </div>
+              </div>    
+         </div>
+     </div>
+	<section ng-show="model.loading === false">
+		<div banner position="bottomBanner" ng-if="$root.settings['site.enabled_plugins'].indexOf('Banner') > -1"></div>
+	</section>
+</main>

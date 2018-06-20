@@ -1,0 +1,11 @@
+<span ng-if="!model.loggedUser"><a href="#!/user/{{user_id}}/{{model.userDisplayName|slugify}}/" title="{{model.userDisplayName}}{{model.userNameStyle}}" ng-if="$root.settings['site.enabled_plugins'].indexOf('UserProfile') > -1"  class="" ng-class="{'text-primary':model.userNameClass === 'true'}">{{model.userDisplayName}}</a>
+<span title="{{model.userDisplayName}}" ng-if="$root.settings['site.enabled_plugins'].indexOf('UserProfile') === -1" >{{model.userDisplayName}}</span>
+<p ng-if="model.userDesignation === 'yes' && model.userDesignationText && $root.settings['site.enabled_plugins'].indexOf('UserProfile') === -1">{{model.userDesignationText}}</p></span>
+
+<div class="media-heading" ng-if="model.loggedUser === 'yes'">
+<div class="text-left">
+	<h3 class="h4"><strong>{{model.userDisplayName}}</strong> <span class="text-muted"></span></h3>
+	<a href="#!/user/{{user_id}}/{{model.userDisplayName|slugify}}/" title="{{model.userDesignationText}}" ng-if="$root.settings['site.enabled_plugins'].indexOf('UserProfile') > -1"><span class="text-muted">{{model.userDesignationText}}</span></a>
+	<span title="{{model.userDesignationText}}" ng-if="$root.settings['site.enabled_plugins'].indexOf('UserProfile') === -1 && model.userDesignationText"><p class="text-muted">{{model.userDesignationText}}</p></span>
+</div>
+</div>

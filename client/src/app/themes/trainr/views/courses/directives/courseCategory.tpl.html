@@ -1,0 +1,76 @@
+<div id="course-category">
+	<div class="list_view" ng-show ="category_view_type =='list'">
+		<main id="main" class="main bg-info bg-primary clearfix">
+		<section>
+			<div class="col-sm-4">
+			  <div class="row">
+				<div class="clearfix">
+				  <div class="col-xs-12">
+					<div class="well-lg">
+					  <div class="col-lg-10  col-lg-offset-1">
+						<h3 class="h1">
+							<strong ng-if="model.categories.sub_category_name">{{model.categories.sub_category_name}}</strong>
+							<strong ng-if="!model.categories.sub_category_name">{{'Courses'| translate}}</strong>
+						</h3>
+						<hr class="">
+						<p class="" ng-if="model.categories.description">{{model.categories.description}}</p>
+						<p class="" ng-if="!model.categories.description">{{'Math begins with counting. It\'s the most important skill we learn in our early years, and it becomes the foundation for all other math concepts. Once we can count, we can add, subtract, and measure the world around us. Shortly thereafter, we learn about place values, graphs, time, money, and shapes.'| translate}}</p>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<div class="well-sm"></div>
+			<div class="col-sm-8 navbar-default text-muted">
+			  <div class="col-xs-12">
+				<div class="well-lg">
+				  <ul class="list-unstyled course-list row" ng-repeat="courses in model.courses.data" ng-if="_metadata.total_records > 0" >
+					  <li class="media">
+						<div class="pull-left"> 
+							<!-- course image when is_from_mooc_affiliate false -->	
+							<a ng-if="courses.image_hash && courses.is_from_mooc_affiliate !== 1" href="#!/course/{{courses.id}}/{{courses.slug}}" title="{{courses.title}}"> 
+								<span class="course_circle_img">
+									<img animate-visible="{{ImgLazyLoad.AnimateVisible}}" animate-speed="{{ImgLazyLoad.AnimateSpeed}}" lazy-src="{{$root.site_url}}img/small_thumb/Course/{{courses.image_hash}}" alt="[Image: {{courses.title}}]" title="{{courses.title}}" class="img-circle" />
+								</span>
+							</a>
+							<a ng-if="!courses.image_hash && courses.is_from_mooc_affiliate !== 1"  href="#!/course/{{courses.id}}/{{courses.slug}}" title="{{courses.title}}"> 
+								<span class="course_circle_img">
+									<img animate-visible="{{ImgLazyLoad.AnimateVisible}}" animate-speed="{{ImgLazyLoad.AnimateSpeed}}" lazy-src="{{$root.site_url}}img/small_thumb/Course/0.default.jpg" alt="[Image: {{courses.title}}]" title="{{courses.title}}" class="img-circle" />
+								</span>
+							</a>
+							<!-- course image when is_from_mooc_affiliate true -->	
+							<a ng-if="courses.course_image && courses.is_from_mooc_affiliate === 1" href="#!/course/{{courses.id}}/{{courses.slug}}" title="{{courses.title}}"> 
+								<span class="course_circle_img">
+									<img animate-visible="{{ImgLazyLoad.AnimateVisible}}" animate-speed="{{ImgLazyLoad.AnimateSpeed}}" lazy-src="{{courses.course_image}}" alt="[Image: {{courses.title}}]" title="{{courses.title}}" class="img-circle" />
+								</span>
+							</a>						
+							<a ng-if="!courses.course_image && courses.is_from_mooc_affiliate === 1" href="#!/course/{{courses.id}}/{{courses.slug}}" title="{{courses.title}}"> 
+								<span class="course_circle_img">
+									<img animate-visible="{{ImgLazyLoad.AnimateVisible}}" animate-speed="{{ImgLazyLoad.AnimateSpeed}}"  lazy-src="{{$root.site_url}}img/small_thumb/Course/0.default.jpg" alt="[Image: {{courses.title}}]" title="{{courses.title}}" class="img-circle" />
+								</span>
+							</a>
+						</div>
+						<div class="media-body">
+						  <div class="media-heading">
+							<div class="navbar-btn clearfix"></div>
+							<div class="navbar-btn clearfix"></div>
+								<a href="#!/course/{{courses.id}}/{{courses.slug}}" title="{{courses.title}}" class="h4 text-info">{{courses.title}}</a>
+							</div>
+							<a href="#!/course/{{courses.id}}/{{courses.slug}}" title="{{courses.title}}" class="h5">{{courses.subtitle}}</a> </div>
+					  </li>
+					  <hr>
+				  </ul>
+				  <div class="text-center text-info"  ng-if="_metadata.total_records === 0">
+					<h3>{{'No course available.'| translate}}</h3>
+				  </div>
+				  <div class="paging clearfix text-center" ng-show="_metadata.total_records > 0">
+					  <pagination total-items="_metadata.total_records"  ng-model="currentPage" ng-change="paginate('#course-category')" max-size="_metadata.maxSize" boundary-links="true" num-pages="_metadata.noOfPages" items-per-page="_metadata.limit" first-text="{{'First'|translate}}" last-text="{{'Last'|translate}}" next-text="{{'Next'|translate}}" previous-text="{{'Previous'|translate}}"></pagination>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		</section>
+		</main>
+	</div>
+</div>

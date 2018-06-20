@@ -1,0 +1,9 @@
+{
+	"name": "DownloadableFileLessons", 
+	"class": "fa fa-2x fa-cloud-download",
+	"description": "By enabling this plugin, instructor can add downloadable type lessons for giving practice and exercise files, exe files and etc to learners.",
+	"dependencies": "Courses",
+	"module_id": "736",
+	"module_hash": "e934718aa6ee4d9a5b841ed5ac6d589a",
+	"display_order": "4"
+}
