@@ -1,6 +1,6 @@
 # Trainr
 
-Trainr is an open source classified platform that is capable to run classified sites similar to Khanacademy Clone script to make websites concerning online training marketplaces. It is written in AngularJS with REST API for high performance in mind.
+Trainr is an open source online training platform similar to Khanacademy Clone script to make websites concerning online training marketplaces. It is written in AngularJS with REST API for high performance in mind.
 
 > This is project is part of Agriya Open Source efforts. Trainr was originally a paid script and was selling around 12000 Euros. It is now released under dual license (OSL 3.0 & Commercial) for open source community benefits.
 
