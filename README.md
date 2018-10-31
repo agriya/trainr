@@ -7,7 +7,7 @@ Trainr is an open source online training platform similar to Khanacademy Clone s
 
 ## Support
 
-Trainr classified platform is an open source project. Full commercial support (commercial license, customization, training, etc) are available through [Trainr classified platform support]
+Trainr is an open source online training project. Full commercial support (commercial license, customization, training, etc) are available through [Trainr platform support]
 
 Theming partner [CSSilize for design and HTML conversions](http://cssilize.com/)
 
