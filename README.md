@@ -4,10 +4,11 @@ Trainr is an open source online training platform similar to Khanacademy Clone s
 
 > This is project is part of Agriya Open Source efforts. Trainr was originally a paid script and was selling around 12000 Euros. It is now released under dual license (OSL 3.0 & Commercial) for open source community benefits.
 
+![trainr_banner](https://user-images.githubusercontent.com/4700341/47853825-02074100-de06-11e8-9c92-7a3d38c7b9cf.png)
 
 ## Support
 
-Trainr is an open source online training project. Full commercial support (commercial license, customization, training, etc) are available through [Trainr platform support]
+Trainr is an open source online training project. Full commercial support (commercial license, customization, training, etc) are available through [Trainr platform](http://trainr.demo.agriya.com/#!/)
 
 Theming partner [CSSilize for design and HTML conversions](http://cssilize.com/)
 
